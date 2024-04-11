@@ -164,7 +164,10 @@ class _LanguageTranslationPageState extends State<LanguageTranslationPage> {
                   controller: messageController,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please Enter Some Text To Translate';
+                      setState(() {
+                        output = "Please Enter Some Text To Translate";
+                      });
+
                     }
                     return null;
                   },
