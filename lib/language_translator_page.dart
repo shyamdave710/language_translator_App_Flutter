@@ -14,35 +14,29 @@ class _LanguageTranslationPageState extends State<LanguageTranslationPage> {
   var originLanguage = "From";
   var destinationLanguage = "To";
   var output = "";
-  TextEditingController message = TextEditingController();
+  TextEditingController messageController = TextEditingController();
 
-  void translate(String src, String dest,String input) async{
-    GoogleTranslator translator=new GoogleTranslator();
-    var translation = await translator.translate(input,from: src,to: dest);
+  void translate(String src, String dest, String input) async {
+    GoogleTranslator translator = GoogleTranslator();
+    var translation = await translator.translate(input, from: src, to: dest);
     setState(() {
       output = translation.text.toString();
     });
-    if(src=="--" || dest=="--")
-      {
-          setState(() {
-            output = "Failed to translate";
-          });
-      }
+    if (src == "--" || dest == "--") {
+      setState(() {
+        output = "Failed to translate";
+      });
+    }
   }
 
-  String getLanguageCode(String language){
-    if(language=="English")
-      {
-        return "en";
-      }
-    else if(language=="Hindi")
-      {
-        return "hi";
-      }
-    else if(language=="Gujarati")
-      {
-        return "guj";
-      }
+  String getLanguageCode(String language) {
+    if (language == "English") {
+      return "en";
+    } else if (language == "Hindi") {
+      return "hi";
+    } else if (language == "Gujarati") {
+      return "gu";
+    }
     return "--";
   }
 
@@ -51,21 +45,21 @@ class _LanguageTranslationPageState extends State<LanguageTranslationPage> {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(15, 45, 73, 1.0),
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Language Translator",
           style: TextStyle(
               color: Color.fromRGBO(201, 188, 141, 1.0),
               fontWeight: FontWeight.w600),
         ),
         centerTitle: true,
-        backgroundColor: Color.fromRGBO(15, 45, 73, 1.0),
+        backgroundColor: const Color.fromRGBO(15, 45, 73, 1.0),
         elevation: 0,
       ),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
               Row(
@@ -74,8 +68,8 @@ class _LanguageTranslationPageState extends State<LanguageTranslationPage> {
                   DropdownButton(
                     items: language.map((String dropDownStringItem) {
                       return DropdownMenuItem(
-                        child: Text(dropDownStringItem),
                         value: dropDownStringItem,
+                        child: Text(dropDownStringItem),
                       );
                     }).toList(),
                     onChanged: (String? value) {
@@ -83,33 +77,30 @@ class _LanguageTranslationPageState extends State<LanguageTranslationPage> {
                         originLanguage = value!;
                       });
                     },
-                    focusColor: Colors.white,
-                    iconDisabledColor: Colors.white,
-                    iconEnabledColor: Colors.white,
                     hint: Text(
                       originLanguage,
                       style:
-                          TextStyle(color: Color.fromRGBO(201, 188, 141, 1.0)),
+                          const TextStyle(color: Color.fromRGBO(201, 188, 141, 1.0)),
                     ),
                     dropdownColor: Colors.white,
-                    icon: Icon(Icons.keyboard_arrow_down),
+                    icon: const Icon(Icons.keyboard_arrow_down,color: Colors.white,),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 40,
                   ),
-                  Icon(
+                  const Icon(
                     Icons.arrow_right_alt_outlined,
                     color: Color.fromRGBO(201, 188, 141, 1.0),
                     size: 40,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 40,
                   ),
                   DropdownButton(
                     items: language.map((String dropDownStringItem) {
                       return DropdownMenuItem(
-                        child: Text(dropDownStringItem),
                         value: dropDownStringItem,
+                        child: Text(dropDownStringItem),
                       );
                     }).toList(),
                     onChanged: (String? value) {
@@ -117,31 +108,28 @@ class _LanguageTranslationPageState extends State<LanguageTranslationPage> {
                         destinationLanguage = value!;
                       });
                     },
-                    focusColor: Colors.white,
-                    iconDisabledColor: Colors.white,
-                    iconEnabledColor: Colors.white,
                     hint: Text(
                       destinationLanguage,
                       style:
-                          TextStyle(color: Color.fromRGBO(201, 188, 141, 1.0)),
+                          const TextStyle(color: Color.fromRGBO(201, 188, 141, 1.0)),
                     ),
                     dropdownColor: Colors.white,
-                    icon: Icon(Icons.keyboard_arrow_down),
+                    icon:  const Icon(Icons.keyboard_arrow_down,color: Colors.white),
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 40,
               ),
               Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(10),
                 child: TextFormField(
-                  cursorColor: Color.fromRGBO(201, 188, 141, 1.0),
+                  cursorColor: const Color.fromRGBO(201, 188, 141, 1.0),
                   autofocus: false,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color.fromRGBO(201, 188, 141, 1.0),
                   ),
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     // Styles for the text field decoration
                     labelText: 'Please Enter Text',
                     labelStyle: TextStyle(
@@ -156,6 +144,13 @@ class _LanguageTranslationPageState extends State<LanguageTranslationPage> {
                         width: 2, // Width of the border line
                       ),
                     ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      borderSide: BorderSide(
+                        color:Color.fromRGBO(201, 188, 141, 1.0),
+                        width: 2,
+                      ),
+                    ),
                     enabledBorder: OutlineInputBorder(
                       // Style for the focused border
                       borderSide: BorderSide(
@@ -163,24 +158,39 @@ class _LanguageTranslationPageState extends State<LanguageTranslationPage> {
                     ),
                     errorStyle: TextStyle(color: Colors.red, fontSize: 15),
                   ),
-                  controller: message,
-                  validator: (value)  {
-                    if(value==null || value.isEmpty)
-                      {
-                        return 'Please Enter Some Text To Translate';
-                      }
+                  controller: messageController,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please Enter Some Text To Translate';
+                    }
                     return null;
                   },
                 ),
               ),
-              Padding(padding: EdgeInsets.all(8),
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(primary: Color.fromRGBO(15, 45, 73, 1.0)),
-                  onPressed: (){
-                    translate(originLanguage, getLanguageCode(destinationLanguage), message.text.toString());
-                  }, child: Text("Translate")),),
-              SizedBox(height: 40,),
-              Text("\n$output",style: TextStyle(color:Color.fromRGBO(201, 188, 141, 1.0),),),
+              Padding(
+                padding: const EdgeInsets.all(10),
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(201, 188, 141, 1.0)),
+                    onPressed: () {
+                      setState(() {
+                        translate(
+                            getLanguageCode(originLanguage),
+                            getLanguageCode(destinationLanguage),
+                            messageController.text.toString());
+                      });
+                    },
+                    child: const Text("Translate")),
+              ),
+              const SizedBox(
+                height: 40,
+              ),
+              Text(
+                "\n$output",
+                style: const TextStyle(
+                  color: Color.fromRGBO(201, 188, 141, 1.0),
+                ),
+              ),
             ],
           ),
         ),
