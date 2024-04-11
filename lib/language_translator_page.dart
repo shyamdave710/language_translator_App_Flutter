@@ -37,7 +37,10 @@ class _LanguageTranslationPageState extends State<LanguageTranslationPage> {
     } else if (language == "Gujarati") {
       return "gu";
     }
-    return "--";
+    else{
+      return "--";
+    }
+
   }
 
   @override
